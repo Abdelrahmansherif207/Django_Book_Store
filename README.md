@@ -12,6 +12,17 @@ This screen allows users to add a new book by entering its title, author, and de
 
 ---
 
+---
+
+## 📋 List All Books
+
+This screen displays a table or grid of all books stored in the system. Each entry typically includes the book's title, author, and a brief description, along with actions such as **View**, **Edit**, or **Delete**.
+
+![List All Books](/snapshots/list.png)
+
+---
+
+
 ## 🔁 Update Book
 
 This screen lets users edit the details of an existing book.
