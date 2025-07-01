@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ book.title }}</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 2em;
+                background: #f9f9f9;
+            }
+            h1 {
+                color: #333;
+            }
+            .detail {
+                background: #fff;
+                padding: 1.5em;
+                border-radius: 6px;
+                box-shadow: 0 2px 6px #eee;
+                max-width: 400px;
+            }
+            p {
+                margin: 0.5em 0;
+            }
+            a {
+                color: #1976d2;
+                text-decoration: none;
+                margin-right: 1em;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="detail">
+            <h1>{{ book.title }}</h1>
+            <p><strong>Author:</strong> {{ book.author }}</p>
+            <p><strong>Description:</strong> {{ book.description }}</p>
+            <a href="{% url 'book_edit' book.id %}">Edit</a>
+            <a href="{% url 'book_delete' book.id %}">Delete</a>
+            <a href="{% url 'book_list' %}">Back to list</a>
+        </div>
+    </body>
+</html>
