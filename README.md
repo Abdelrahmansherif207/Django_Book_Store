@@ -1,6 +1,15 @@
 # 📚 Bookstore UI Examples
 
 This repository showcases UI examples for a basic Bookstore application. Below are snapshots of the main user interface pages used in the application.
+---
+
+## ✨ Admin Panel
+
+Admin Panel with book list added to the database
+
+![Admin](/snapshots/admin.png)
+
+---
 
 ---
 
