@@ -34,8 +34,9 @@
     <body>
         <div class="detail">
             <h1>{{ book.title }}</h1>
-            <p><strong>Author:</strong> {{ book.author }}</p>
-            <p><strong>Description:</strong> {{ book.description }}</p>
+            <p><strong>Description:</strong> {{ book.desc }}</p>
+            <p><strong>Rate:</strong> {{ book.rate }}</p>
+            <p><strong>Views:</strong> {{ book.views }}</p>
             <a href="{% url 'book_edit' book.id %}">Edit</a>
             <a href="{% url 'book_delete' book.id %}">Delete</a>
             <a href="{% url 'book_list' %}">Back to list</a>

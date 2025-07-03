@@ -1,55 +1,38 @@
-from django.shortcuts import render, redirect
-from django.http import Http404
-
-
-BOOKS = []
-BOOK_ID_COUNTER = 1
-
-class Book:
-    def __init__(self, title, author, description):
-        global BOOK_ID_COUNTER
-        self.id = BOOK_ID_COUNTER
-        BOOK_ID_COUNTER += 1
-        self.title = title
-        self.author = author
-        self.description = description
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Book
 
 def book_list(request):
-    return render(request, 'books/book_list.html', {'books': BOOKS})
+    books = Book.objects.all()
+    return render(request, 'books/book_list.html', {'books': books})
 
 def book_create(request):
     if request.method == 'POST':
         title = request.POST.get('title')
-        author = request.POST.get('author')
-        description = request.POST.get('description')
-        book = Book(title, author, description)
-        BOOKS.append(book)
+        desc = request.POST.get('description')
+        rate = request.POST.get('rate') or 0
+        book = Book.objects.create(title=title, desc=desc, rate=rate)
         return redirect('book_list')
     return render(request, 'books/book_form.html')
 
 def book_detail(request, book_id):
-    book = next((b for b in BOOKS if b.id == book_id), None)
-    if not book:
-        raise Http404('Book not found')
+    book = get_object_or_404(Book, pk=book_id)
+    book.views += 1
+    book.save()
     return render(request, 'books/book_detail.html', {'book': book})
 
 def book_edit(request, book_id):
-    book = next((b for b in BOOKS if b.id == book_id), None)
-    if not book:
-        raise Http404('Book not found')
+    book = get_object_or_404(Book, pk=book_id)
     if request.method == 'POST':
         book.title = request.POST.get('title')
-        book.author = request.POST.get('author')
-        book.description = request.POST.get('description')
+        book.desc = request.POST.get('description')
+        book.rate = request.POST.get('rate') or 0
+        book.save()
         return redirect('book_detail', book_id=book.id)
     return render(request, 'books/book_form.html', {'book': book})
 
 def book_delete(request, book_id):
-    global BOOKS
-    book = next((b for b in BOOKS if b.id == book_id), None)
-    if not book:
-        raise Http404('Book not found')
+    book = get_object_or_404(Book, pk=book_id)
     if request.method == 'POST':
-        BOOKS = [b for b in BOOKS if b.id != book_id]
+        book.delete()
         return redirect('book_list')
     return render(request, 'books/book_confirm_delete.html', {'book': book})

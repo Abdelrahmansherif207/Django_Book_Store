@@ -38,6 +38,10 @@
             .add-btn:hover {
                 background: #125ea2;
             }
+            .meta {
+                color: #555;
+                font-size: 0.95em;
+            }
         </style>
     </head>
     <body>
@@ -49,10 +53,11 @@
                 <a href="{% url 'book_detail' book.id %}"
                     ><strong>{{ book.title }}</strong></a
                 >
-                by {{ book.author }} (<a href="{% url 'book_edit' book.id %}"
-                    >Edit</a
+                <span class="meta"
+                    >| Rate: {{ book.rate }} | Views: {{ book.views }}</span
                 >
-                | <a href="{% url 'book_delete' book.id %}">Delete</a>)
+                (<a href="{% url 'book_edit' book.id %}">Edit</a> |
+                <a href="{% url 'book_delete' book.id %}">Delete</a>)
             </li>
             {% empty %}
             <li>No books available.</li>
