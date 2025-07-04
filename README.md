@@ -44,6 +44,6 @@ This screen lets users edit the details of an existing book.
 
 This screen displays detailed information about a specific book including its title, author, and description.
 
-![Book Details](/snapshots/details.png)
+![Book Details](/snapshots/details.png) 
 
 ---
